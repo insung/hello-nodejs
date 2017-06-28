@@ -53,6 +53,22 @@ app.get('/img', function (req, res) {
     res.send('hello static! <img src="/example.png">');
 });
 
+// app.route() 이용하면 라우트 경로에 대하여 체인 가능한 라우트 핸들러를 작성할 수 있습니다. 
+app.route('/book')
+    .get(function (req, res) {
+        res.send('Get');
+    })
+    .post(function (req, res) {
+        res.send('Post');
+    })
+    .put(function (req, res) {
+        res.send('Put');
+    });
+
+// express.Router 예제
+var birds = require('./birds');
+app.use('/birds', birds);
+
 app.listen(3000, function() {
     console.log('listen port 3000..');
 });
