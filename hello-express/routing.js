@@ -69,6 +69,14 @@ app.route('/book')
 var birds = require('./birds');
 app.use('/birds', birds);
 
+// exmpale for jade template
+app.set('view engine', 'jade');
+app.set('views', './views');
+
+app.get('/template', function (req, res){
+    res.render('temp', { message: 'hello message', time: Date() });
+});
+
 app.listen(3000, function() {
     console.log('listen port 3000..');
 });
