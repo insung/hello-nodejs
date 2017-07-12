@@ -33,37 +33,29 @@ app.post('/topic', function(req, res) {
     });
 });
 
-app.get('/list', function(req, res) {
+app.get(['/list', '/list/:id'], function(req, res) {
     fs.readdir('file', function(err, files) {
         if (err) {
             console.log(err);
             res.status(500).send('Internal Server Error');
         }
 
-        res.render('temp', { topics : files });
-    });
-});
+        var id = req.params.id;
 
-app.get('/list/:id', function (req, res) {
-    var id = req.params.id;
+        if (id) {
+            fs.readFile('file/' + id, 'utf-8', function(err, data) {
+                if (err) {
+                    console.log(err);
+                    res.status(500).send('Internal Server Error');
+                }
 
-    fs.readdir('file', function(err, files) {
-        if (err) {
-            console.log(err);
-            res.status(500).send('Internal Server Error');
+                res.render('view', { files:files, title:id, description:data });
+            });
         }
-
-        fs.readFile('file/' + id, 'utf-8', function(err, data) {
-            if (err) {
-                console.log(err);
-                res.status(500).send('Internal Server Error');
-            }
-
-            res.render('view', { files:files, title:id, description:data });
-        });
+        else {
+            res.render('view', { files:files, title:'welcome', description:'hello' });
+        }
     });
-
-    
 });
 // end of routing
 
