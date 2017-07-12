@@ -1,0 +1,10 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+  body
+    h1 server side javascript
+    ul
+      each val in topics
+        li
+          a(href='/list/'+val)= val
