@@ -2,6 +2,23 @@ const express = require('express');
 const app = express();
 const fs = require('fs');
 
+// /usr URL 경로에 uploads 폴더를 바인딩
+app.use('/usr', express.static('uploads'));
+
+const multer = require('multer');
+
+// destination 과 filename 을 여기서 정의
+var _storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'uploads/')
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.originalname + '-' + Date.now())
+    }
+});
+
+var upload = multer({ storage: _storage });
+
 // body-parser for post method
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -29,7 +46,8 @@ app.post('/topic', function(req, res) {
             res.status(500).send('Internal Server Error');
         }
 
-        res.send('Hi! ' + title + ' file created.');
+        // res.send('Hi! ' + title + ' file created.');
+        res.redirect('/list/' + title)
     });
 });
 
@@ -56,6 +74,15 @@ app.get(['/list', '/list/:id'], function(req, res) {
             res.render('view', { files:files, title:'welcome', description:'hello' });
         }
     });
+});
+
+app.get('/upload', function(req, res) {
+    res.render('upload');
+});
+
+app.post('/upload', upload.single('userfile'), function(req, res) {
+    
+    res.send('uploaded : ' + req.file);
 });
 // end of routing
 
