@@ -2,16 +2,16 @@ var express = require('express');
 var cookieParser = require('cookie-parser');
 var app = express();
 
-app.use(cookieParser());
+app.use(cookieParser('dhfjdhfdj'));
 
 app.get('/cookie', function(req, res) {
     var count = 1;
 
-    if (req.cookies.count) {
-        count += parseInt(req.cookies.count);
+    if (req.signedCookies.count) {
+        count += parseInt(req.signedCookies.count);
     } 
-    res.cookie('count', count);
-    res.send('count: ' + req.cookies.count );
+    res.cookie('count', count, { signed:true });
+    res.send('count: ' + req.signedCookies.count );
 });
 
 // product array
@@ -44,7 +44,7 @@ app.get('/product', function(req, res) {
 app.get(['/cart', '/cart/:id'], function(req, res) {
 
     if (!req.params.id) {
-        var cart = req.cookies.cart;
+        var cart = req.signedCookies.cart;
         if (!cart) { res.send('the cart empty') }
         else {
             var output = `<h1>Cart List</h1>`;
@@ -59,14 +59,14 @@ app.get(['/cart', '/cart/:id'], function(req, res) {
     } else {
         var id = req.params.id;
 
-        if (req.cookies.cart) { var cart = req.cookies.cart; }
+        if (req.signedCookies.cart) { var cart = req.signedCookies.cart; }
         else { var cart = {}; }
 
         if (!cart[id]) cart[id] = 0;    
 
         cart[id] = parseInt(cart[id]) + 1;
 
-        res.cookie('cart', cart);
+        res.cookie('cart', cart, { signed:true });
         res.redirect('/cart');
     }
 });
