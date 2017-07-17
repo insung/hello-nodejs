@@ -39,7 +39,26 @@ app.get('/auth/login', function(req, res) {
 });
 
 app.post('/auth/login', function(req, res) {
-    res.send(req.body.username);
+    var username = req.body.username;
+    var password = req.body.password;
+    
+    var user = {
+        name : 'tester',
+        pass : 'pwpw',
+        displayName : 'display'
+    };
+
+    if (username === user.name && password === user.pass) {
+        req.session.displayName = user.displayName;
+        res.redirect('/auth/welcome');
+    }
+    else {
+        res.send('unauthorized.. <a href="/auth/login">go to login</a>');
+    }
+});
+
+app.get('/auth/welcome', function(req, res) {
+    res.send('login in: ' + req.session.displayName);
 });
 
 app.listen(3000, function() {
