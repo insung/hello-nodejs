@@ -1,13 +1,15 @@
 var express = require('express');
 var session = require('express-session')
 var bodyParser = require('body-parser');
+var FileStore = require('session-file-store')(session);
 
 var app = express();
 
 app.use(session({
+  store: new FileStore,
   secret: 'keyboard cat',
   resave: false,
-  saveUninitialized: true
+  saveUninitialized: true  
 }));
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -41,24 +43,21 @@ app.get('/auth/login', function(req, res) {
 app.post('/auth/login', function(req, res) {
     var username = req.body.username;
     var password = req.body.password;
-    
-    var user = {
-        name : 'tester',
-        pass : 'pwpw',
-        displayName : 'display'
-    };
 
-    if (username === user.name && password === user.pass) {
-        req.session.displayName = user.displayName;
+    req.session.displayName = username;
+
+    return req.session.save(function() {
         res.redirect('/auth/welcome');
-    }
-    else {
-        res.send('unauthorized.. <a href="/auth/login">go to login</a>');
-    }
+    });
 });
 
 app.get('/auth/welcome', function(req, res) {
     res.send('login in: ' + req.session.displayName);
+});
+
+app.get('/auth/logout', function(req, res) {
+    delete req.session.displayName;
+    res.redirect('/auth/login');
 });
 
 app.listen(3000, function() {
