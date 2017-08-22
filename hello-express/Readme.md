@@ -23,5 +23,13 @@ express 에 대한 예제
 
 ## 소스 구성
 
+* routing.js
+  * hello-express 폴더에서 기본적으로 사용할 routing 및 routing 사용 방법 예제
 * birds.js
   * express 모듈을 사용하여 간단한 router 의 개념을 알아보는 예제
+* form.js
+  * bodyparser 를 사용하여 request body 를 파싱하는 것을 알아보는 예제
+* query-string.js
+  * url 로 전송된 query string 의 topic id 에 해당하는 url 로 redirect 하는 예제
+* sementic-url.js
+  * 전달받은 query string 에 id 를 부여할 수 있는 것을 보여주는 예제
