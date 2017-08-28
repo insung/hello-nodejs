@@ -35,7 +35,9 @@ chapter-01
   * views 폴더 안에 pages 폴더 생성
   * views 폴더 안에 partials 폴더 생성
   * views 안에 있는 파일들을 pages 로 이동
-  * partials 안에 stylesheet.ejs 파일 생성 및 수정
+  * partials 안에 stylesheet.ejs 파일 생성 및 수정 (p29~30)
   * partials 안에 javascript.ejs 파일 생성 및 수정
   * partials 안에 header.ejs 파일 생성 및 수정
   * partials 안에 footer.ejs 파일 생성 및 수정
+  * app.js 수정 (p31)
+  * views/pages/index.ejs 수정
