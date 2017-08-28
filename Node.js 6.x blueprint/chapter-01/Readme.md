@@ -44,4 +44,8 @@ chapter-01
   * views/pages/error.ejs 수정
 
 * 로그인, 가입 템플릿 추가
-  * 
+  * login.ejs 추가
+  * signup.ejs 추가
+  * profile.ejs 추가
+  * 추가 middleware 설치
+    * npm install connect-flash connect-mongo mongoose express-session gravatar bcrypt-nodejs passport passport-local --save

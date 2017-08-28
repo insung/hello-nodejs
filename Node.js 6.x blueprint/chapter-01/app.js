@@ -52,6 +52,23 @@ app.use(function(err, req, res, next) {
 
 module.exports = app;
 
+// route
+router.get('/login', function(req, res, next) {
+  res.render('login', { title: 'Login page', message: req.flash('loginMessage') });
+});
+
+router.get('/signup', function(req, res) {
+  res.render('signup', { title: 'Signup page', message: req.flash('signupMessage') });
+});
+
+router.get('/profile', function(req, res, next) {
+  res.render('profile', { 
+    title: 'Profile page', 
+    user: req.user, 
+    avatar: gravatar.url(req.user.emaill, {s: '100', r: 'x', d: 'retro'}, true) }
+  );
+});
+
 app.set('port', process.env.PORT || 3001);
 var server = app.listen(app.get('port'), function() {
   console.log('Express server listening on port ' + server.address().port);
