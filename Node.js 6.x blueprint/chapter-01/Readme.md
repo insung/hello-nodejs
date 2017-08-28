@@ -1,4 +1,4 @@
-기초 구축
+chapter-01
 ===
 
 * 목표  
@@ -24,3 +24,18 @@
   * chapter-01/routes js 파일을 chapter-01/server/routes 로 옮김
   * chapter-01/app.js 수정
   * chatper-01/server/routes/index.js 수정
+  * npm start 로 페이지 출력
+
+* 기본 behavior 수정하고 어플리케이션 시작 (p27~28)
+  * app.js 수정
+  * package.json 수정 
+
+
+* partial 파일 이용해 views 폴더 재편 (<% include %> 태그 사용)
+  * views 폴더 안에 pages 폴더 생성
+  * views 폴더 안에 partials 폴더 생성
+  * views 안에 있는 파일들을 pages 로 이동
+  * partials 안에 stylesheet.ejs 파일 생성 및 수정
+  * partials 안에 javascript.ejs 파일 생성 및 수정
+  * partials 안에 header.ejs 파일 생성 및 수정
+  * partials 안에 footer.ejs 파일 생성 및 수정
