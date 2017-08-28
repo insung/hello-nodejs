@@ -20,3 +20,7 @@
 * 어플리케이션 MVC 패턴으로 수정  
   * server 폴더 생성
   * server 폴더 안에 config, routes, views 폴더 생성
+  * chapter-01/views ejs 파일을 chapter-01/server/views 로 옮김
+  * chapter-01/routes js 파일을 chapter-01/server/routes 로 옮김
+  * chapter-01/app.js 수정
+  * chatper-01/server/routes/index.js 수정
