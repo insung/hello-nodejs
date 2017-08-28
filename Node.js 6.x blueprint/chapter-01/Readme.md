@@ -41,3 +41,7 @@ chapter-01
   * partials 안에 footer.ejs 파일 생성 및 수정
   * app.js 수정 (p31)
   * views/pages/index.ejs 수정
+  * views/pages/error.ejs 수정
+
+* 로그인, 가입 템플릿 추가
+  * 
