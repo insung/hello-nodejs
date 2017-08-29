@@ -52,3 +52,5 @@ chapter-01
   * app.js 파일 리팩터링
   * config 와 passport 파일 추가
   * server/models 폴더 만들고 user 스키마 추가
+  * route 추가 설정
+  
