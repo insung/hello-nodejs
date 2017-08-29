@@ -53,4 +53,4 @@ chapter-01
   * config 와 passport 파일 추가
   * server/models 폴더 만들고 user 스키마 추가
   * route 추가 설정
-  
+  * server/controllers 폴더 생성 및 comments controller 추가

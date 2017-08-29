@@ -16,6 +16,9 @@ var flash = require('connect-flash');
 var index = require('./server/routes/index');
 var users = require('./server/routes/users');
 
+// 코멘트 컨트롤러 불러오기
+var comments = require('./server/controllers/comments');
+
 var app = express();
 
 // view engine setup
@@ -66,6 +69,10 @@ app.use(flash());
 
 app.use('/', index);
 app.use('/users', users);
+
+// 코멘트를 위한 라우트 설정
+app.get('/comments', comments.hasAuthorization, comments.list);
+app.post('/comments', comments.hasAuthorization, comments.create);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
