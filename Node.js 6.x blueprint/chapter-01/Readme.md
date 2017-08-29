@@ -49,3 +49,5 @@ chapter-01
   * profile.ejs 추가
   * 추가 middleware 설치
     * npm install connect-flash connect-mongo mongoose express-session gravatar bcrypt-nodejs passport passport-local --save
+  * app.js 파일 리팩터링
+  * config 와 passport 파일 추가
