@@ -51,3 +51,4 @@ chapter-01
     * npm install connect-flash connect-mongo mongoose express-session gravatar bcrypt-nodejs passport passport-local --save
   * app.js 파일 리팩터링
   * config 와 passport 파일 추가
+  * server/models 폴더 만들고 user 스키마 추가
