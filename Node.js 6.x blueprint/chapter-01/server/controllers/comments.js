@@ -15,7 +15,7 @@ exports.list = function(req, res) {
             res.render('comments', {
                 title: 'Comments Page',
                 comments: comments,
-                gravatar: gravatar.url(comments.email, { s: '80', r: 'x', : 'retro' }, true)
+                gravatar: gravatar.url(comments.email, { s: '80', r: 'x', d: 'retro' }, true)
             });
         });
 };

@@ -13,7 +13,7 @@ var MongoStore = require('connect-mongo')(session);
 var passport = require('passport');
 var flash = require('connect-flash');
 
-var index = require('./server/routes/index');
+var routes = require('./server/routes/index');
 var users = require('./server/routes/users');
 
 // 코멘트 컨트롤러 불러오기
@@ -53,8 +53,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
   secret: 'abcdefg',
   saveUninitialized: true,
-  resave: true,
-  
+  resave: true,  
   // express-session 과 connect-mongo 를 이용해 mongo db 에 세션 저장
   store: new MongoStore({
     url: config.url,
@@ -67,7 +66,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 
-app.use('/', index);
+app.use('/', routes);
 app.use('/users', users);
 
 // 코멘트를 위한 라우트 설정
@@ -81,37 +80,31 @@ app.use(function(req, res, next) {
   next(err);
 });
 
+// development error handler
+// will print stacktrace
+if (app.get('env') === 'development') {
+  app.use(function(err, req, res, next) {
+      res.status(err.status || 500);
+      res.render('error', {
+          message: err.message,
+          error: err
+      });
+  });
+}
+
 // error handler
 app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.render('error', {
+    message: err.message,
+    error: {}
+  });
 });
 
 module.exports = app;
 
-// route
-router.get('/login', function(req, res, next) {
-  res.render('login', { title: 'Login page', message: req.flash('loginMessage') });
-});
-
-router.get('/signup', function(req, res) {
-  res.render('signup', { title: 'Signup page', message: req.flash('signupMessage') });
-});
-
-router.get('/profile', function(req, res, next) {
-  res.render('profile', { 
-    title: 'Profile page', 
-    user: req.user, 
-    avatar: gravatar.url(req.user.emaill, {s: '100', r: 'x', d: 'retro'}, true) }
-  );
-});
-
-app.set('port', process.env.PORT || 3001);
+app.set('port', process.env.PORT || 3002);
 var server = app.listen(app.get('port'), function() {
   console.log('Express server listening on port ' + server.address().port);
 });

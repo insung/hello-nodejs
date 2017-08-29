@@ -1,5 +1,5 @@
 var LocalStrategy = require('passport-local').Strategy;
-var User = require('../modles/users');
+var User = require('../models/users');
 
 module.exports = function(passport) {
     // passport 초기화
