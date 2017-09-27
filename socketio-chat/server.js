@@ -9,12 +9,15 @@ app.get('/', function(req, res) {
     res.sendFile(__dirname + '/views/index.html');
 });
 
+// socket.io namespace 설정
+var nsp = io.of('/my-namespace');
+
 // connection 이 되면 event handler function 의 인자로 socket 이 들어옴
-io.on('connection', function(socket) {
+nsp.on('connection', function(socket) {
 
     //////// login ////////
     socket.on('login', function(data) {
-        console.log('userid: ' + data.userid + ', name: ' + data.name + ' logged in');
+        // console.log('userid: ' + data.userid + ', name: ' + data.name + ' logged in');
 
         // socket 에 사용자 정보를 저장
         socket.name = data.name;
@@ -27,7 +30,7 @@ io.on('connection', function(socket) {
 
     //////// chat ////////
     socket.on('chat', function(data) {
-        console.log('socket.userid: ' + socket.userid + ', data.msg: ' + data.msg);
+        // console.log('socket.userid: ' + socket.userid + ', data.msg: ' + data.msg);
 
         var msg = {
             from: {
@@ -38,7 +41,7 @@ io.on('connection', function(socket) {
         };
 
         // 메시지 전송한 사용자를 제외한 모든 사용자에게 메시지를 전송
-        socket.broadcast.emit('chat', msg);
+        nsp.emit('chat', msg);
     });
 
     //////// disconnect ////////
@@ -47,7 +50,8 @@ io.on('connection', function(socket) {
     });
 
     socket.on('disconnect', function() {
-        console.log('user disconnected: %s', socket.name);
+        if (socket.name)
+            console.log('user disconnected: %s', socket.name);
     });
 });
 

@@ -34,7 +34,7 @@
 
             $(function() {
                 // socket io 서버에 접속
-                var socket = io();
+                var socket = io('/my-namespace');
                 var _name = makeRandomName();
                 var _userid = makeRandomName() + '@gmail.com';
 
@@ -50,6 +50,11 @@
                 // login 메시지를 수신하면
                 socket.on("login", function(data) {
                     $("#chatLogs").append("<div><strong>" + data + "</strong> has joined</div>");
+                });
+
+                // chat 메시지를 수신하면
+                socket.on("chat", function(data) {
+                    $("#chatLogs").append("<div>" + data.from.name + ": " + data.msg + "</div>")
                 });
 
                 // send 버튼 클릭시
