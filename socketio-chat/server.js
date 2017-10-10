@@ -3,10 +3,20 @@ var server = require('http').createServer(app);
 
 // http server를 socket.io server로 upgrade 한다.
 var io = require('socket.io')(server);
+var bodyParser = require('body-parser');
+var _ = require('underscore');
+
+// support JSON request
+app.use(bodyParser.json());
 
 // index.html 로 전송
 app.get('/', function(req, res) {
     res.sendFile(__dirname + '/views/index.html');
+});
+
+// random chat room 으로 이동
+app.get('/rand-chat', function(req, res) {
+    res.sendFile(__dirname + '/views/rand-chat.html');
 });
 
 // socket.io namespace 설정

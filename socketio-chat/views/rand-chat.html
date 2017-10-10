@@ -1,0 +1,38 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>random chat room</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    </head>
+    <body>
+        <h2>Random Chat</h2>
+        <br />
+        <div class="container">
+            <div class="row">
+
+                <!-- send form -->
+                <div class="col-sm-9">
+                    <form class="form-inline">
+                        <div class="form-group">
+                            <label for="userName" style="width: 90px;">User Name:</label>
+                            <input type="text" class="form-control" id="userName">
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <label for="messageForm" style="width: 90px;">Message:</label>
+                            <input type="text" class="form-control" id="messageForm">                            
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send</button>
+                    </form>
+                </div>
+
+                <!-- participants -->
+                <div class="col-sm-1">
+                    <b>participants</b>
+                </div>
+            </div>
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+        <script src="/socket.io/socket.io.js"></script>
+    </body>
+</html>
